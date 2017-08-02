@@ -2,21 +2,19 @@
   <ion-content padding="true" class="has-header">
     <div id="noticias-container3">
       <ion-slides disable-side-menu-drag="" options="{'loop': true}" slider="slider2" delegate-handle="slider2" id="noticias-slider2" style="width:100%;height:200px;">
-        <ion-slide-page id="noticias-slide210" style="background:url(&quot;img/QtBD0QFST0aMfLATDANK_campus.jpg&quot;) no-repeat center;background-size:cover;"></ion-slide-page>
+        <ion-slide-page id="noticias-slide210"  style="background:url(http://localhost/radiounl/{{foto.FOTO}})  center;background-size:cover;"></ion-slide-page>
       </ion-slides>
     </div>
     <div class="spacer" style="width: 300px; height: 10px;"></div>
-    <ion-list id="noticias-list103">
+    <ion-list id="noticias-list103" ng-repeat="noticia in noticias">
       <ion-item class="item-thumbnail-left" id="noticias-list-item9" ui-sref="tabsController.tituloDeNoticia()">
         <img src="img/vAZiXmoCSzGHIaIpqVS2_juridica.jpg">
-        <h2>Noticia </h2>
-        <p style="white-space:normal;">La noticia </p>
+        <h2>{{noticia.title}} </h2>
       </ion-item>
-      <ion-item class="item-thumbnail-left" id="noticias-list-item21" ui-sref="tabsController.tituloDeNoticia()">
-        <img src="img/vAZiXmoCSzGHIaIpqVS2_juridica.jpg">
-        <h2>Noticia </h2>
-        <p style="white-space:normal;">La noticia </p>
-      </ion-item>
+      <!--<div ng-repeat="noticia in noticias">
+        {{noticia.title}}
+      </div>-->
+{{noticia.description}}
     </ion-list>
   </ion-content>
 </ion-view>

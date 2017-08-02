@@ -39,18 +39,31 @@ function ($scope, $stateParams) {
 
 
 }])
-   
-.controller('noticiasCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
 
+.controller('noticiasCtrl', ['$scope', '$stateParams','$http', function ($scope, $stateParams,$http) {
+     $http.get("http://unl.edu.ec/rssunl.xml",
+            {
+    transformResponse: function (cnv) {
+      var x2js = new X2JS();
+      var aftCnv = x2js.xml_str2json(cnv);
+      return aftCnv;
+    }
+  }).success(function (data) {
+    console.log(data);
+    $scope.noticias=data.rss.channel.item;
+  });
 
+  function image() {
+      var direccionServidor= 'http://localhost/radiounl/index.php/banner_sw';
+        $http.get(direccionServidor).success(function(data){
+            console.log(data);
+            $scope.foto = data.response[0];
+        })
+  }
+    image();
 }])
 
 .controller('programaciNCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
-  
-
 
 }])
 
@@ -78,15 +91,6 @@ function ($scope, $stateParams) {
 
 }])
 
-/*
-.controller('programasGrabadosCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-        $scope.audio = `http://localhost/radiounl/${data.response[0].AUDIO}`
-
-}])
-*/
 .controller('tituloDeNoticiaCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
