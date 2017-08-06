@@ -5,24 +5,27 @@
     </div>
     <h5 id="registrar-heading3" style="color:#000000;font-style:italic;text-align:center;">Registrar Usuario</h5>
     <div id="registrar-container2">      
-      <form id="registrar-form3" class="list">
+      <form id="registrar-form3" class="list" name="formregistrar" novalidate>
         <label class="item item-input" id="registrar-input5" name="nombre" >
-          <input type="text" placeholder="Nombre" ng-model="user.nombre"name="nombre" >
+          <input type="text" placeholder="Nombre" ng-model="user.nombre"name="nombre" required>
+          <span style="color:red;"ng-show="formregistrar.nombre.$error.required">* Nombre Requerido</span>
         </label>
         <div class="spacer" style="width: 300px; height: 13px;"></div>
         <label class="item item-input" id="registrar-input3" name="email">
-          <input type="email" placeholder="Email" ng-model="user.email" required>
-        </label>
-        <div class="spacer" style="width: 300px; height: 13px;"></div>
+          <input type="email" placeholder="Email" ng-model="user.email" name="email" required>
+          <span style="color:red;"ng-show="formregistrar.email.$error.required">* Email requerido</span>
+        </label>  
         <div class="spacer" style="width: 300px; height: 13px;"></div>
         <label class="item item-input" id="registrar-input4" name="password">
-        <input type="password" placeholder="Password"  ng-model="user.clave" required>
+        <input type="password" placeholder="Password"  ng-model="user.clave" name="password" ng-minlength="5" required>
+        <span style="color:red;"ng-show="formregistrar.password.$error.minlength">* Mínimo 5 caracteres</span>
         </label>
         <div class="spacer" style="width: 300px; height: 13px;"></div>
         <label class="item item-input" id="registrar-input6" name="confpassword">
-          <input type="password" placeholder="Confirmar Password" ng-model="user.repclave" required>
+          <input type="password" placeholder="Confirmar Password" ng-model="user.repclave" name="password2" required>
+          <span style="color:red;"ng-show="formregistrar.password2.$error.required">* Repita contraseña</span>
         </label>
-        <a  ng-click="enviar(user)" id="registrar-button3" style="font-weight:300;border-radius:12px 12px 12px 12px;" class="button button-positive button-block">Crear Cuenta</a>
+        <a ng-disabled="formregistrar.$invalid" ng-click="enviar(user)" id="registrar-button3" style="font-weight:300;border-radius:12px 12px 12px 12px;" class="button button-positive button-block">Crear Cuenta</a>
         <div></div>
       </form>
       {{user|json}}
