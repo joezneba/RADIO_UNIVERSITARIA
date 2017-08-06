@@ -16,27 +16,82 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('loginRegisterCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginRegisterCtrl', ['$scope', '$stateParams', '$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $http) {
+    //$scope.user={};
+    //$scope.enviar = function(){
+      //  debugger
+    //}
 
 
 }])
    
-.controller('registrarCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('registrarCtrl', ['$scope', '$stateParams', '$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http) {
+    $scope.user={
+        nombre:'',
+        email:'',
+        clave:'',
+        repclave:''
+    };
 
+    $scope.enviar=function (userdata) {
+        if (userdata.clave==userdata.repclave) {//Valida que el las claves coicidan
+          console.log('form submitedd');
+        console.log(userdata);
 
+        $http({
+            method:'post',
+            data: $.param(userdata),
+            url: 'http://localhost/radiounl/Clienteapp/CrearUsuario',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }).success(function (data) {
+            console.log(data);
+            alert(userdata.nombre+' te has registrado correctamente');
+        }).error(function (data) {
+            console.log(data);
+            alert('Fallo el registro Intente nuevamente.');
+        });  
+        }else{
+            alert('fallo pass');
+        }
+              
+    };
 }])
+
+/*
+$scope.enviar=function (userdata) {
+        console.log('form submitedd');
+        console.log(userdata);
+
+        $http({
+            method:'post',
+            data: $.param(userdata),
+            url: 'http://localhost/radiounl/Clienteapp/CrearUsuario',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }).success(function (data) {
+            console.log(data);
+            alert(userdata.nombre+' te has registrado correctamente');
+        }).error(function (data) {
+            console.log(data);
+            alert('Fallo el registro Intente nuevamente.');
+        });      
+    };
+*/
    
 .controller('quienesSomosCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-
+    
 
 }])
 
@@ -49,6 +104,7 @@ function ($scope, $stateParams) {
       return aftCnv;
     }
   }).success(function (data) {
+      
     console.log(data);
     $scope.noticias=data.rss.channel.item;
   });
