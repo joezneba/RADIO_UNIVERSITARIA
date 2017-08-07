@@ -40,7 +40,51 @@ function ($scope, $stateParams,$http) {
     };
 
     $scope.enviar=function (userdata) {
+        ////////
+        
+
+
+        ///////////////////////////////validacion de correo existente///////////
+        var correo= userdata.email;
+        var direccionServidor= 'http://localhost/radiounl/clienteapp_sw/find/';
+        $http.get(direccionServidor+correo).success(function(data){
+            console.log(data);
+            $scope.correo = data.response.CORREO;
+            if (userdata.email==$scope.correo) {
+            console.log("Coiciden");
+            alert('Ya existe un usuario registrado con este correo!')
+            window.location.reload();
+            ///////////////fin validacion correo existente/////////////
+        }
+        
+        });
+        
         if (userdata.clave==userdata.repclave) {//Valida que el las claves coicidan
+            console.log('form submitedd');
+            console.log(userdata);
+            ///////Guardar Nuevo usuario////////////
+        $http({
+            method:'post',
+            data: $.param(userdata),
+            url: 'http://localhost/radiounl/Clienteapp/CrearUsuario',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }).success(function (data) {
+            console.log(data);
+            alert(userdata.nombre+' te has registrado correctamente');
+                location.href ="#/page6";
+        }).error(function (data) {
+            console.log(data);
+            alert('Fallo el registro Intente nuevamente.');
+        });  
+        }else{
+            alert('Contraseña no coiciden');
+        }
+
+        
+        ///////////////////////////////
+        /*if (userdata.clave==userdata.repclave) {//Valida que el las claves coicidan
           console.log('form submitedd');
         console.log(userdata);
 
@@ -60,7 +104,7 @@ function ($scope, $stateParams,$http) {
         });  
         }else{
             alert('Contraseña no coiciden');
-        }
+        }*/
               
     };
 }])
