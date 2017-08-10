@@ -1,20 +1,20 @@
 <ion-view title="Quienes Somos" id="page3">
-  <ion-content padding="true" scroll="false" class="has-header">
+  <ion-content padding="true" scroll="false" class="has-header" ng-repeat="info in informacion">
     <div>
       <img src="img/zWYxWtPJTXq0LUN089VM_radiologo.png" style="display: block; width: 90%; height: 50%; margin-left: auto; margin-right: auto;">
     </div>
     <div id="quienesSomos-markdown1" style="text-align:justify;" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Somos un medio de comunicación público institucional.Buscamos generar una sociedad mejor informada y educada desdes los principios y valores de nuestra academia</p>
+      <p style="color:#000000;">{{info.DESCRIPCION}}</p>
     </div>
     <div class="spacer" style="width: 300px; height: 81px;"></div>
     <div id="quienesSomos-container5">
       <h5 id="quienesSomos-heading4" style="color:#000000;font-weight:400;font-style:italic;">Contactos:</h5>
       <div id="quienesSomos-markdown14" class="show-list-numbers-and-dots">
         <p style="color:#000000;">
-          <strong>Email: </strong> universitaria98.5@unl.edu.ec universitariaunl@hotmail.com.</p>
+          <strong>Email: </strong>&nbsp;{{info.CORREO}}</p>
 
         <p style="color:#000000;">
-          <strong>Teléfono - Fax: </strong>072545055</p>
+          <strong>Teléfono - Fax: </strong>&nbsp;{{info.TELEFONO}}</p>
       </div>
     </div>
   </ion-content>
