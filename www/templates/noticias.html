@@ -6,15 +6,15 @@
       </ion-slides>
     </div>
     <div class="spacer" style="width: 300px; height: 10px;"></div>
-    <ion-list id="noticias-list103" ng-repeat="noticia in noticias">
+    <ion-list id="noticias-list103" >
       <ion-item class="item-thumbnail-left" id="noticias-list-item9" ui-sref="tabsController.tituloDeNoticia()">
         <img src="img/vAZiXmoCSzGHIaIpqVS2_juridica.jpg">
-        <h2>{{noticia.title}} </h2>
+        <span ng-bind-html = "Message"></span>
+        <!--<h2>{{noticia.title}} </h2>-->
       </ion-item>
-      <!--<div ng-repeat="noticia in noticias">
-        {{noticia.title}}
-      </div>-->
-{{noticia.description}}
+      <!--<span ng-bind-html = "Message"></span>-->
+      {{noticia.title[0].value}}
+      <span ng-bind-html = "Message"></span>
     </ion-list>
   </ion-content>
 </ion-view>

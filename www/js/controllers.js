@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['ngSanitize'])
   
 .controller('menuCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -122,8 +122,8 @@ function ($scope, $stateParams,$http) {
 
 }])
 
-.controller('noticiasCtrl', ['$scope', '$stateParams','$http', function ($scope, $stateParams,$http) {
-     $http.get("http://unl.edu.ec/rssunl.xml",
+.controller('noticiasCtrl', ['$scope', '$stateParams','$http', '$sce', function ($scope, $stateParams,$http, $sce) {
+     /*$http.get("http://unl.edu.ec/rssunl.xml",
             {
     transformResponse: function (cnv) {
       var x2js = new X2JS();
@@ -134,8 +134,8 @@ function ($scope, $stateParams,$http) {
       
     console.log(data);
     $scope.noticias=data.rss.channel.item;
-  });
-
+  });*/
+ 
   function image() {
       var direccionServidor= 'http://localhost/radiounl/index.php/banner_sw';
         $http.get(direccionServidor).success(function(data){
@@ -145,13 +145,24 @@ function ($scope, $stateParams,$http) {
   }
     image();
 
-    /*
-    var direccionServidor= 'http://localhost/radiounl/index.php/informacion_sw';
+    /*var direccionServidor= 'http://localhost/web_unl/es/api/noti';
         $http.get(direccionServidor).success(function(data){
+            //console.log(data[0].body[0].value);
+            let test=data[0].body[0].value;
+            $scope.Message = $sce.trustAsHtml(test);
+            //$scope.Message = $sce.trustAsHtml(test); permite utilizar las etiquetas html llevadas por el objeto json 
+            console.log(test);
+        })*/
+        var direccionServidor= 'http://localhost/web_unl/es/api/noti';
+        $http.get(direccionServidor).success(function(data){
+            //console.log(data[0].body[0].value);
+            let test=data[0].body[0].value;
+            $scope.noticia = data[0];
+            $scope.Message = $sce.trustAsHtml(test);
+            //$scope.Message = $sce.trustAsHtml(test);
+            //$scope.Message = $sce.trustAsHtml(test); permite utilizar las etiquetas html llevadas por el objeto json 
             console.log(data);
-            $scope.informacion= data.response;
         })
-    */
 }])
 
 .controller('programaciNCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
@@ -182,10 +193,10 @@ function ($scope, $stateParams,$http) {
 
 }])
 
-.controller('tituloDeNoticiaCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('tituloDeNoticiaCtrl', ['$scope', '$stateParams', '$http','$sce', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$sce) {
 
 
 }])
