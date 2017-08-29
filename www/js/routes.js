@@ -80,7 +80,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.tituloDeNoticia', {
-    url: '/page9',
+    url: '/page9/:id',
     views: {
       'tab4': {
         templateUrl: 'templates/tituloDeNoticia.html',

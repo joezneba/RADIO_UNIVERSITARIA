@@ -145,23 +145,10 @@ function ($scope, $stateParams,$http) {
   }
     image();
 
-    /*var direccionServidor= 'http://localhost/web_unl/es/api/noti';
+        var direccionServidor= 'http://localhost/radiounl/noticia_sw';
         $http.get(direccionServidor).success(function(data){
-            //console.log(data[0].body[0].value);
-            let test=data[0].body[0].value;
-            $scope.Message = $sce.trustAsHtml(test);
-            //$scope.Message = $sce.trustAsHtml(test); permite utilizar las etiquetas html llevadas por el objeto json 
-            console.log(test);
-        })*/
-        var direccionServidor= 'http://localhost/web_unl/es/api/noti';
-        $http.get(direccionServidor).success(function(data){
-            //console.log(data[0].body[0].value);
-            let test=data[0].body[0].value;
-            $scope.noticia = data[0];
-            $scope.Message = $sce.trustAsHtml(test);
-            //$scope.Message = $sce.trustAsHtml(test);
-            //$scope.Message = $sce.trustAsHtml(test); permite utilizar las etiquetas html llevadas por el objeto json 
             console.log(data);
+            $scope.noticias=data.response;
         })
 }])
 
@@ -197,7 +184,12 @@ function ($scope, $stateParams,$http) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$sce) {
-
+    var id=$stateParams.id;
+    var direccionServidor= 'http://localhost/radiounl/noticia_sw/noti/';
+    $http.get(direccionServidor+id).success(function(data){
+        console.log(data);
+        $scope.noticia=data.response[0];
+    })
 
 }])
    
