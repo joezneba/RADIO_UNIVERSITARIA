@@ -16,15 +16,56 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('loginRegisterCtrl', ['$scope', '$stateParams', '$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginRegisterCtrl', ['$scope', '$stateParams', '$http','LoginService', '$ionicPopup','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http) {
-    //$scope.user={};
-    //$scope.enviar = function(){
-      //  debugger
-    //}
+function ($scope, $stateParams, $http, LoginService, $ionicPopup, $state) {
+    $scope.data={
+        email:'',
+        clave:''
+    };
 
+
+    //evaluar
+   
+     $scope.enviar=function(userdata){
+
+        $http({
+            method:'post',
+            data: $.param(userdata),
+            url: 'http://localhost/radiounl/clienteapp/validar',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            }
+        }).success(function (data) {
+            console.log(data);
+            console.log(data.response);
+            if(data.response==null){
+                alert("error");
+            }else{
+                localStorage.setItem("token", data.response);
+                location.href ="#/page11";
+            }
+        
+        
+            //alert("ya paso");   
+            //alert(userdata.nombre+' te has registrado correctamente');
+        })
+     };
+   
+
+   /* $scope.login = function(){
+      LoginService.loginUser($scope.data.username,$scope.data.password).success(function(data){
+        $state.go('tab.dash');
+      }).error(function(data) {
+          var alertPopup= $ionicPopup.alert({
+              title: 'Login Failed!',
+              template:'Please check your credentials!'
+          });
+      });
+        //console.log("LOGIN user: "+$scope.data.username+" -PW: "+$scope.data.password);
+    }*/
+    
 
 }])
    
@@ -169,14 +210,27 @@ function ($scope, $stateParams,$http) {
 }])
 
 .controller('programasGrabadosCtrl', ['$scope', '$stateParams', '$http',function ($scope, $stateParams,$http) {
-    var direccionServidor= 'http://localhost/radiounl/index.php/programagrabado_sw';
-    $http.get(direccionServidor).success(function(data){
-        console.log(data);
-        $scope.programasgrabados = data.response;
-        $scope.programasgrabados.forEach(function(element) {
-           element.AUDIO= `http://localhost/radiounl/${element.AUDIO}`
-        }, this);
-    })
+    
+    var token = localStorage.getItem("token");
+    if (token ==null) {
+        console.log(token);
+        location.href ="#/page11/page6";
+
+        
+    }else{
+        console.log(token);
+        var direccionServidor= 'http://localhost/radiounl/index.php/programagrabado_sw';
+        $http.get(direccionServidor).success(function(data){
+            console.log(data);
+            $scope.programasgrabados = data.response;
+            $scope.programasgrabados.forEach(function(element) {
+               element.AUDIO= `http://localhost/radiounl/${element.AUDIO}`
+            }, this);
+        })
+    }
+    
+
+    
 
 }])
 

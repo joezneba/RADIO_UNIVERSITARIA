@@ -6,21 +6,23 @@
     <div id="loginRegister-container1">
       <form id="loginRegister-form1" class="list">
         <label class="item item-input" id="loginRegister-input1" name="email">
-          <input type="email" placeholder="Email">
+          <input type="email" placeholder="Email" ng-model="data.email">
         </label>
         <div class="spacer" style="width: 300px; height: 13px;"></div>
       </form>
     </div>
     <form id="loginRegister-form2" class="list">
       <label class="item item-input" id="loginRegister-input2" name="password">
-        <input type="password" placeholder="Password">
+        <input type="password" placeholder="Password" ng-model="data.clave">
       </label>
-      <a ui-sref="tabsController.radioOnline()" id="loginRegister-button1" class="button button-positive button-block">Login</a>
+      <button class="button button-block button-calm" ng-click="login()">Login</button>
+      <a ng-click="enviar(data)" id="loginRegister-button1" class="button button-positive button-block">Login</a>
       <h5 id="loginRegister-heading1" style="color:#000000;font-weight:400;font-style:italic;text-align:center;">...or login with:</h5>
       <a ui-sref="tabsController.radioOnline()" id="loginRegister-button2" class="button button-positive button-block icon ion-social-facebook-outline"> Facebook</a>
       <center>
         <a ui-sref="registrar">Registrarse...</a>
       </center>
     </form>
+    {{data}}
   </ion-content>
 </ion-view>

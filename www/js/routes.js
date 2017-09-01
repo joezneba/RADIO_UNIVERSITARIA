@@ -76,7 +76,7 @@ angular.module('app.routes', [])
   .state('programasGrabados', {
     url: '/page11',
     templateUrl: 'templates/programasGrabados.html',
-    controller: 'programasGrabadosCtrl'
+    controller: 'programasGrabadosCtrl',   
   })
 
   .state('tabsController.tituloDeNoticia', {
