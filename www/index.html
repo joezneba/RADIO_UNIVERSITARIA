@@ -54,9 +54,13 @@
     
     <script src="js/directives.js"></script>
     <script src="js/services.js"></script>
-    <script src="js/xml2json.js"></script><!--intentando -->
+    <script src="js/xml2json.js"></script><!--intentando xml a json -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>    
-
+    <script>
+      function cerrar(){
+        navigator.app.exitApp();
+      }
+    </script>
   </head>
   <body ng-app="app" animation="slide-left-right-ios7">
   <div>
@@ -81,21 +85,21 @@
           <ion-item class="item-icon-left" id="menu-list-item11" ui-sref="quienesSomos()" menu-close="" data-componentid="list-item11">
             <i class="icon ion-ios-telephone"></i>Contactos</ion-item>
           <ion-item class="item-divider" id="menu-list-item-divider175" data-componentid="list-item-divider175"> Pagina Institucional</ion-item>
-          <ion-item class="item-icon-left" id="menu-list-item5" data-componentid="list-item5">
-            <i class="icon ion-social-chrome"></i>Radio Universitaria</ion-item>
+          <ion-item class="item-icon-left" id="menu-list-item5" data-componentid="list-item5" onclick="window.open('http://unl.edu.ec/radio/inicio-radio-universitaria', '_blank'); return false;">
+            <i class="icon ion-social-chrome" ></i>Radio Universitaria</ion-item>
           <ion-item class="item-divider" id="menu-list-item-divider1" data-componentid="list-item-divider1"> Redes Sociales</ion-item>
-          <ion-item class="item-icon-left" id="menu-list-item2" data-componentid="list-item2">
+          <ion-item class="item-icon-left" id="menu-list-item2" data-componentid="list-item2" onclick="window.open('https://www.facebook.com/universitaria98.5/', '_system'); return false;">
             <i class="icon ion-social-facebook"></i>Facebook</ion-item>
-          <ion-item class="item-icon-left" id="menu-list-item3" data-componentid="list-item3">
+          <ion-item class="item-icon-left" id="menu-list-item3" data-componentid="list-item3"onclick="window.open('https://twitter.com/radiounl', '_system'); return false;">
             <i class="icon ion-social-twitter"></i>Twitter</ion-item>
           <ion-item class="item-divider" id="menu-list-item-divider3" data-componentid="list-item-divider3"> </ion-item>
           <ion-item class="item-icon-left" id="menu-list-item10" ui-sref="programasGrabados()" menu-close="" data-componentid="list-item10">
             <i class="icon ion-android-desktop"></i>Programación grabada</ion-item>
-          <ion-item class="item-icon-left" id="menu-list-item12" ui-sref="cambiarContraseA()" menu-close="" data-componentid="list-item12">
-            <i class="icon ion-android-settings"></i>Cambiar Contraseña</ion-item>
+          <!--<ion-item class="item-icon-left" id="menu-list-item12" ui-sref="cambiarContraseA()" menu-close="" data-componentid="list-item12">
+            <i class="icon ion-android-settings"></i>Cambiar Contraseña</ion-item>-->
           <ion-item class="item-divider" id="menu-list-item-divider172" data-componentid="list-item-divider172"> </ion-item>
-          <ion-item class="item-icon-left" id="menu-list-item4" data-componentid="list-item4">
-            <i class="icon ion-close-circled"></i>Salir</ion-item>
+          <ion-item class="item-icon-left" id="menu-list-item4" data-componentid="list-item4" onclick="cerrar()">
+            <i class="icon ion-close-circled" ></i>Salir</ion-item>
         </ion-list>
       </ion-content>
     </ion-side-menu>
