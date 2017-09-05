@@ -39,12 +39,17 @@ function ($scope, $stateParams, $http, LoginService, $ionicPopup, $state) {
             }
         }).success(function (data) {
             console.log(data);
-            console.log(data.response);
-            if(data.response==null){
-                alert("error");
+            console.log(data.var);
+            if(data.var==null){
+                var alertPopup= $ionicPopup.alert({
+                    title: 'Login Failed!',
+                    template:'Por Favor revisa tus credenciales!'
+                });
             }else{
-                localStorage.setItem("token", data.response);
+                localStorage.setItem("token", data.var);
                 location.href ="#/page11";
+                window.location.reload();//actualiza para que cargue los audios
+                
             }
         
         
@@ -69,25 +74,21 @@ function ($scope, $stateParams, $http, LoginService, $ionicPopup, $state) {
 
 }])
    
-.controller('registrarCtrl', ['$scope', '$stateParams', '$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('registrarCtrl', ['$scope', '$stateParams', '$http','$ionicPopup','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http) {
+function ($scope, $stateParams,$http,$ionicPopup,$state) {
     $scope.user={
         nombre:'',
         email:'',
         clave:'',
         repclave:''
     };
-
+    var direccionServidor= 'http://localhost/radiounl/clienteapp_sw/find/';
     $scope.enviar=function (userdata) {
-        ////////
-        
-
-
         ///////////////////////////////validacion de correo existente///////////
         var correo= userdata.email;
-        var direccionServidor= 'http://localhost/radiounl/clienteapp_sw/find/';
+        
         $http.get(direccionServidor+correo).success(function(data){
             console.log(data);
             $scope.correo = data.response.CORREO;
@@ -117,10 +118,18 @@ function ($scope, $stateParams,$http) {
                 location.href ="#/page6";
         }).error(function (data) {
             console.log(data);
-            alert('Fallo el registro Intente nuevamente.');
+            var alertPopup= $ionicPopup.alert({
+                title: 'Error!',
+                template:'Fallo el registro Intente nuevamente.!'
+            });
+            //alert('Fallo el registro Intente nuevamente.');
         });  
         }else{
-            alert('Contraseña no coiciden');
+            //alert('Contraseña no coiciden');
+            var alertPopup= $ionicPopup.alert({
+                title: 'Error!',
+                template:'Constraseña no coiciden.!'
+            });
         }
 
         
@@ -209,15 +218,15 @@ function ($scope, $stateParams,$http) {
     
 }])
 
-.controller('programasGrabadosCtrl', ['$scope', '$stateParams', '$http',function ($scope, $stateParams,$http) {
+.controller('programasGrabadosCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup','$state',function ($scope, $stateParams,$http, $ionicPopup,$state) {
     
     var token = localStorage.getItem("token");
     if (token ==null) {
-        console.log(token);
-        location.href ="#/page11/page6";
-
+        console.log("primer token"+token);
+        window.location.href ="#/page6";
         
-    }else{
+    }
+    if(token !=null){
         console.log(token);
         var direccionServidor= 'http://localhost/radiounl/index.php/programagrabado_sw';
         $http.get(direccionServidor).success(function(data){
@@ -225,7 +234,7 @@ function ($scope, $stateParams,$http) {
             $scope.programasgrabados = data.response;
             $scope.programasgrabados.forEach(function(element) {
                element.AUDIO= `http://localhost/radiounl/${element.AUDIO}`
-            }, this);
+            },this);
         })
     }
     

@@ -95,7 +95,7 @@ angular.module('app.routes', [])
     controller: 'cambiarContraseACtrl'
   })
 
-$urlRouterProvider.otherwise('/page6')
+$urlRouterProvider.otherwise('/page1/page2')
 
 
 });
