@@ -33,7 +33,7 @@ function ($scope, $stateParams, $http, LoginService, $ionicPopup, $state) {
         $http({
             method:'post',
             data: $.param(userdata),
-            url: 'http://localhost/radiounl/clienteapp/validar',
+            url: 'http://www.diplez.com/radiounl/Clienteapp/validar',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'
             }
@@ -84,7 +84,7 @@ function ($scope, $stateParams,$http,$ionicPopup,$state) {
         clave:'',
         repclave:''
     };
-    var direccionServidor= 'http://localhost/radiounl/clienteapp_sw/find/';
+    var direccionServidor= 'http://www.diplez.com/radiounl/Clienteapp_SW/find/';
     $scope.enviar=function (userdata) {
         ///////////////////////////////validacion de correo existente///////////
         var correo= userdata.email;
@@ -108,7 +108,7 @@ function ($scope, $stateParams,$http,$ionicPopup,$state) {
         $http({
             method:'post',
             data: $.param(userdata),
-            url: 'http://localhost/radiounl/Clienteapp/CrearUsuario',
+            url: 'http://www.diplez.com/radiounl/Clienteapp/CrearUsuario',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'
             }
@@ -164,7 +164,7 @@ function ($scope, $stateParams,$http,$ionicPopup,$state) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http) {
-    var direccionServidor= 'http://localhost/radiounl/index.php/informacion_sw';
+    var direccionServidor= 'http://www.diplez.com/radiounl/index.php/Informacion_SW';
         $http.get(direccionServidor).success(function(data){
             console.log(data);
             $scope.informacion= data.response;
@@ -185,9 +185,10 @@ function ($scope, $stateParams,$http) {
     console.log(data);
     $scope.noticias=data.rss.channel.item;
   });*/
- 
+  
+
   function image() {
-      var direccionServidor= 'http://localhost/radiounl/index.php/banner_sw';
+      var direccionServidor= 'http://www.diplez.com/radiounl/index.php/Banner_SW';
         $http.get(direccionServidor).success(function(data){
             console.log(data);
             $scope.foto = data.response[0];
@@ -195,11 +196,20 @@ function ($scope, $stateParams,$http) {
   }
     image();
 
-        var direccionServidor= 'http://localhost/radiounl/noticia_sw';
-        $http.get(direccionServidor).success(function(data){
-            console.log(data);
-            $scope.noticias=data.response;
-        })
+        var direccionServidor= 'http://www.diplez.com/radiounl/Noticia_SW';
+        function obtenerNoticias() {
+            $http.get(direccionServidor).success(function(data){
+                console.log(data);
+                $scope.noticias=data.response;
+            })
+        }
+        
+        obtenerNoticias();
+
+        $scope.doRefresh =function(){
+            obtenerNoticias();
+            $scope.$broadcast('scroll.refreshComplete');
+        }
 }])
 
 .controller('programaciNCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
@@ -209,7 +219,7 @@ function ($scope, $stateParams,$http) {
    
 .controller('programaciNDiariaCtrl', ['$scope','$stateParams','$http', function ($scope, $stateParams,$http) {
     var dia =$stateParams.dia;
-    var direccionServidor= 'http://localhost/radiounl/programa_sw/dia/';
+    var direccionServidor= 'http://www.diplez.com/radiounl/Programa_SW/dia/';
         $http.get(direccionServidor+dia).success(function(data){
             console.log(data);
             $scope.programas = data.response;
@@ -228,12 +238,12 @@ function ($scope, $stateParams,$http) {
     }
     if(token !=null){
         console.log(token);
-        var direccionServidor= 'http://localhost/radiounl/index.php/programagrabado_sw';
+        var direccionServidor= 'http://www.diplez.com/radiounl/index.php/Programagrabado_SW';
         $http.get(direccionServidor).success(function(data){
             console.log(data);
             $scope.programasgrabados = data.response;
             $scope.programasgrabados.forEach(function(element) {
-               element.AUDIO= `http://localhost/radiounl/${element.AUDIO}`
+               element.AUDIO= `http://www.diplez.com/radiounl/${element.AUDIO}`
             },this);
         })
     }
@@ -248,7 +258,7 @@ function ($scope, $stateParams,$http) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$sce) {
     var id=$stateParams.id;
-    var direccionServidor= 'http://localhost/radiounl/noticia_sw/noti/';
+    var direccionServidor= 'http://www.diplez.com/radiounl/Noticia_SW/noti/';
     $http.get(direccionServidor+id).success(function(data){
         console.log(data);
         $scope.noticia=data.response[0];

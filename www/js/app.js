@@ -9,7 +9,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 
 .config(function($ionicConfigProvider, $sceDelegateProvider){
 
-  $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**', 'http://localhost/radiounl/**','http://unl.edu.ec/rssunl.xml']);
+  $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**', 'http://localhost/radiounl/**','http://unl.edu.ec/rssunl.xml', 'http://www.diplez.com/radiounl/**']);
   //se agrega la lista blanca 'http://localhost/radiounl/**' la direccion de los servidores 
 })
 
