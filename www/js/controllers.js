@@ -16,10 +16,10 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('loginRegisterCtrl', ['$scope', '$stateParams', '$http','LoginService', '$ionicPopup','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginRegisterCtrl', ['$scope', '$stateParams', '$http','LoginService', '$ionicPopup','$state','$auth','$cordovaOauth', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http, LoginService, $ionicPopup, $state) {
+function ($scope, $stateParams, $http, LoginService, $ionicPopup, $state,$auth, $cordovaOauth) {
     $scope.data={
         email:'',
         clave:''
@@ -51,14 +51,23 @@ function ($scope, $stateParams, $http, LoginService, $ionicPopup, $state) {
                 window.location.reload();//actualiza para que cargue los audios
                 
             }
-        
-        
-            //alert("ya paso");   
-            //alert(userdata.nombre+' te has registrado correctamente');
         })
      };
-   
-
+    
+     $scope.loginFacebook = function() {
+        $cordovaOauth.facebook("205100480028878", ["email"]).then(function(result) {
+            localStorage.setItem("token", result.access_token);
+            location.href ="#/page11";
+            window.location.reload();
+        }, function(error) {
+            var alertPopup= $ionicPopup.alert({
+                title: 'Login Failed!',
+                template:'Por Favor intenta nuevamente!'
+            });
+        });
+        
+    };
+     
    /* $scope.login = function(){
       LoginService.loginUser($scope.data.username,$scope.data.password).success(function(data){
         $state.go('tab.dash');
@@ -205,7 +214,7 @@ function ($scope, $stateParams,$http) {
         }
         
         obtenerNoticias();
-
+        ////refresca nuevas noticias 
         $scope.doRefresh =function(){
             obtenerNoticias();
             $scope.$broadcast('scroll.refreshComplete');
@@ -234,6 +243,7 @@ function ($scope, $stateParams,$http) {
     if (token ==null) {
         console.log("primer token"+token);
         window.location.href ="#/page6";
+        window.location.reload();
         
     }
     if(token !=null){

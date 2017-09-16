@@ -19,6 +19,7 @@
   "cordovaPlatforms": [],
   "dependencies": {
     "@types/xml2js": "0.4.0",
+    "ng-cordova-oauth": "^0.3.0",
     "xml2js": "^0.4.17"
   }
 }

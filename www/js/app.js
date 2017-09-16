@@ -5,11 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services',])
+angular.module('app', ['ionic', 'satellizer','app.controllers', 'app.routes', 'app.directives','app.services','ngCordovaOauth',])
 
 .config(function($ionicConfigProvider, $sceDelegateProvider){
 
-  $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**', 'http://localhost/radiounl/**','http://unl.edu.ec/rssunl.xml', 'http://www.diplez.com/radiounl/**']);
+  $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**', 'http://localhost/radiounl/**','http://unl.edu.ec/rssunl.xml', 'http://www.diplez.com/radiounl/**','https://www.facebook.com/**']);
   //se agrega la lista blanca 'http://localhost/radiounl/**' la direccion de los servidores 
 })
 
@@ -81,3 +81,4 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
     }
   };
 });
+
