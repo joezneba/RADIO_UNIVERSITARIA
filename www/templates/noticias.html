@@ -3,7 +3,7 @@
     <div id="noticias-container3">
       <ion-slides disable-side-menu-drag="" options="{'loop': true}" slider="slider2" delegate-handle="slider2" id="noticias-slider2" style="width:100%;height:200px;">
         <div>
-          <img src="http://www.diplez.com/radiounl/{{foto.FOTO}}" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
+          <img src="https://radio.unl.edu.ec/radiounl/{{foto.FOTO}}" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
         </div>
       </ion-slides>
     </div>
@@ -12,7 +12,7 @@
     </ion-refresher>
     <ion-list id="noticias-list103" ng-repeat="noticia in noticias">
       <ion-item class="item-thumbnail-left" id="noticias-list-item9" ui-sref="tabsController.tituloDeNoticia({id:'{{noticia.IDNOTICIA}}'})"  >
-        <img src="http://www.diplez.com/radiounl/{{noticia.FOTO}}" >
+        <img src="https://radio.unl.edu.ec/radiounl/{{noticia.FOTO}}" >
         <h2>{{noticia.TITULO}} </h2>
         <span>{{noticia.DESCRIPCION}}</span><br>
         <span>{{noticia.FECHA}}</span>
